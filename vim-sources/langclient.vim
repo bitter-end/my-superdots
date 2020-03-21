@@ -1,13 +1,5 @@
 
 
-" F5 pops up the LanguageClient context menu
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-" Or map each action separately
-" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-
 " code completion
 
 " jump to definition
@@ -19,3 +11,5 @@ nnoremap <silent><leader>r :call LanguageClient_textDocument_references()<CR>
 " rename identifier under the cursor
 nnoremap <silent><leader>R :call LanguageClient_textDocument_rename()<CR>
 
+" F5 pops up the LanguageClient context menu
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
