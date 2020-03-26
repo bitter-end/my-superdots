@@ -18,3 +18,30 @@ function file_is_zeroes {
         return 1
     fi
 }
+
+
+function swap {
+    if [ $# -ne 2 ] ; then
+        echo "USAGE: swap FILE1 FILE2"
+        return 1
+    fi
+
+    local TMPFILE=tmp.$$
+    mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE "$2"
+}
+
+
+function dated_file {
+    if [ $# -lt 1 ] ; then
+        echo "USAGE: dated_file FILEPATH [EXT]"
+        return 1
+    fi
+    filename=$(date +%Y%m%d)
+    if [ ! -z "$2" ] ; then
+        ext=".$2"
+    fi
+    fullpath="${1}/${filename}${ext}"
+    $EDITOR "$fullpath"
+}
+
+

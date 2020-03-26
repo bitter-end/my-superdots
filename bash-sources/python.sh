@@ -40,3 +40,11 @@ function venv3 {
 
 	source "$dest/bin/activate"
 }
+
+
+if [ -f /opt/python/venv3/bin/activate ] ; then
+    alias py_def='venv3 /opt/python/venv3'
+fi
+
+
+
