@@ -44,6 +44,7 @@ function venv3 {
 
 if [ -f /opt/python/venv3/bin/activate ] ; then
     alias py_def='venv3 /opt/python/venv3'
+    venv3 /opt/python/venv3
 fi
 
 
