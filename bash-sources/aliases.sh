@@ -11,3 +11,7 @@ alias copy='xclip -sel clip'
 # alias srcsync='rsync --delete -av --exclude "*.pyc" --exclude packer_cache --exclude ".*.swo" --exclude "*.img*" --exclude ".*.swp" --exclude ".*.swn" --exclude ".git"'
 # alias srcsyncnodel='rsync -av --exclude "*.pyc" --exclude packer_cache --exclude ".*.swo" --exclude "*.img*" --exclude ".*.swp" --exclude ".*.swn" --exclude ".git"'
 alias git_first="git rev-list --max-parents=0 HEAD"
+
+alias tmcp="tmux show-buffer | xclip -i -sel clip"
+
+
