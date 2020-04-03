@@ -1,7 +1,9 @@
 # virtualenvwrapper
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.8
 
-export WORKON_HOME=~/.venvs
+export WORKON_HOME=$HOME/.venvs
+export PROJECT_HOME=$HOME/ws/dev
+
 wrapper=/usr/local/bin/virtualenvwrapper.sh
 
 if [ -e "$wrapper" ] ; then
