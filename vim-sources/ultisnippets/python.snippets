@@ -17,9 +17,56 @@ snippet ---
 
 endsnippet
 
+snippet py_class
+class ${1:"ChangeClassName"}
+	"""
+	This class performs . . .
+
+	Properties go here
+	"""
+
+	def __init__(self) -> None:
+	    """
+		Initialize our class
+
+		Args:
+			None
+
+		Returns:
+			None
+
+		Raises:
+			None
+		"""
+		pass
+
+endsnippet
+
+snippet py_func
+
+	def ${1:"ChangeFuncName"}(self) -> None:
+	    """
+		This method . . .
+
+		Args:
+			None
+
+		Returns:
+			None
+
+		Raises:
+			None
+		"""
+		pass
+
+endsnippet
+
+
+
 snippet server
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# NEED TO FIXXX - use Click
 
 """
 Runs the $1 web application
@@ -123,6 +170,7 @@ endsnippet
 snippet script
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# NEED TO FIXXX - use Click
 
 
 """
