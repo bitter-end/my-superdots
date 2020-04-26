@@ -18,14 +18,15 @@ snippet ---
 endsnippet
 
 snippet py_class
-class ${1:"ChangeClassName"}
+class ${1:"ClassName"}:
 	"""
 	This class performs . . .
 
-	Properties go here
+	Attributes:
+		attribute_name: attribute_desc
 	"""
 
-	def __init__(self) -> None:
+    def __init__(self) -> None:
 	    """
 		Initialize our class
 
@@ -43,21 +44,37 @@ class ${1:"ChangeClassName"}
 endsnippet
 
 snippet py_func
+def ${1:"FuncName"}(self) -> None:
+	"""
+	This method . . .
 
-	def ${1:"ChangeFuncName"}(self) -> None:
-	    """
-		This method . . .
+	Args:
+		None
 
-		Args:
-			None
+	Returns:
+		None
 
-		Returns:
-			None
+	Raises:
+		None
+	"""
+	pass
 
-		Raises:
-			None
-		"""
-		pass
+endsnippet
+
+snippet py_prop
+@property
+def ${1:"PropName"}(self) -> $2:
+	"""
+	$3.
+
+	Returns:
+		$2
+	"""
+	return self._$4
+
+@$1.setter
+def $1(self, value: $2) -> None:
+	self._$4 = value
 
 endsnippet
 
