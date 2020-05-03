@@ -19,8 +19,12 @@ let g:LanguageClient_serverCommands = {
     \ 'sh': ['bash-language-server', 'start'],
     \ 'c': ['clangd-9'],
     \ 'cpp': ['clangd-9'],
-    \ 'python': ['pyls'],
 \ }
+
+Plug 'davidhalter/jedi-vim'
+" to disable docstring window:
+" autocmd FileType python setlocal completeopt-=preview
+
 
 " Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 " Plug 'tpope/vim-rails', { 'for' : 'ruby' }
