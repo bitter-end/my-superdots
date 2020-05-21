@@ -76,3 +76,9 @@ set laststatus=2
 
 " exe "source ".s:this_dir."/after/colors/jellybeans.vim"
 
+if (&term =~ '^xterm' && &t_Co == 256)
+  set t_ut='' | set ttyscroll=1
+endif
+set list
+
+
