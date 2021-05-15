@@ -10,12 +10,15 @@ set tabstop=4
 set shiftwidth=4
 "set smartindent
 "set smarttab
+set softtabstop=4
 set smartcase
 set pastetoggle=<F12>
 set nowrap
 set incsearch
 set cmdheight=2
 set colorcolumn=120
+
+set whichwrap+=<,>,h,l,[,]
 
 " colors jellybeans
 " default to dark background
