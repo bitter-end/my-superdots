@@ -23,10 +23,10 @@ call plug#begin('~/.vim/plugged')
 "     \ 'other': ['./leftimus'],
 " \ }
 
-Plug 'neoclide/coc.nvim', {
-    \ 'branch': 'release',
-    \ 'do' : ':CocInstall coc-rust-analyzer coc-rust coc-pyright coc-clangd coc-snippets coc-java'
-\ }
+" Plug 'neoclide/coc.nvim', {
+"     \ 'branch': 'release',
+"     \ 'do' : ':CocInstall coc-rust-analyzer coc-rust coc-pyright coc-clangd coc-snippets coc-java'
+" \ }
 " \ 'do' : ':CocInstall coc-rust-analyzer coc-rust coc-pyright coc-clangd coc-solargraph coc-snippets'
 " 
 " " -----------------------------------------------------------------------------
