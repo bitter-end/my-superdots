@@ -1,15 +1,65 @@
+
+let g:virtual_env_dir = expand("~") . "/.vim/python_virtualenv"
+let g:virtual_env_reqs = [
+    \ "jedi",
+    \ "black",
+    \ "pylint",
+    \ "flake8",
+    \ "peewee",
+    \ "arrow",
+\ ]
+function! python#VirtualEnvCreate()
+    "let g:python3_host_prog = g:virtual_env_dir . '/bin/python3'
+
+    if !isdirectory(g:virtual_env_dir)
+        call python#VirtualEnvInstall()
+    endif
+
+    if $VIRTUAL_ENV != ""
+        " let the current virtualenv come before our vim virtual env in the
+        " PATH
+        let $PATH=$VIRTUAL_ENV.'/bin:'.g:virtual_env_dir.'/bin:'.$PATH
+
+        silent! echom "Including vim virtualenv packages in PYTHONPATH: ".glob(g:virtual_env_dir.'/lib/*/site-packages')
+        let $PYTHONPATH=glob(g:virtual_env_dir.'/lib/*/site-packages').":".$PYTHONPATH
+        let $PYTHONPATH=glob($VIRTUAL_ENV.'/lib/*/site-packages').":".$PYTHONPATH
+
+        call coc#config("python.pythonPath", $VIRTAL_ENV . "/bin/python3")
+        silent! echom "setting python.venvPath to ". fnamemodify($VIRTUAL_ENV, ':h')
+        call coc#config("python.venvPath", fnamemodify($VIRTUAL_ENV, ':h'))
+        silent! echom "setting python.venv to " . fnamemodify($VIRTUAL_ENV, ':t')
+        call coc#config("python.venv", fnamemodify($VIRTUAL_ENV, ':t'))
+    else
+        let $PATH=g:virtual_env_dir.'/bin:'.$PATH
+        let activate_this = g:virtual_env_dir . "/bin/activate_this.py"
+        silent! execute "python3 exec(open('" . activate_this . "').read(), {'__file__': '" . activate_this . "'}))"
+    endif
+
+    " coc settings
+    call coc#config("python.formatting.provider", "black")
+endfunction
+
+function! python#VirtualEnvInstall()
+    if !isdirectory(g:virtual_env_dir)
+        silent! execute "!mkdir -p " . shellescape(fnamemodify(g:virtual_env_dir, ":h"))
+        silent! echom "Creating virtual environment"
+        silent! execute "!python3 -m virtualenv " . shellescape(g:virtual_env_dir)
+    endif
+    silent! echom "Installing packages"
+    silent! execute "!pip install " . join(g:virtual_env_reqs, ' ')
+endfunction
+
 function! SetupPython()
     setlocal tabstop=4
     setlocal shiftwidth=4
     setlocal expandtab
+    call python#VirtualEnvCreate()
 endfunction
 
 command! -bar SetupPython call SetupPython()
 autocmd Filetype python SetupPython
 
 function! PythonAddImportInsertLeave(insert_mode)
-    echom "CALLED INSERTLEAVE"
-
     execute "normal! V/import.*$\\n\\s*\\n\<CR>"
     execute "normal! !sort -k 2|uniq\<CR>"
     normal! `mzz"
@@ -95,19 +145,18 @@ function! PythonAddImport(insert_mode)
     execute "normal! aimport\<space>\<ESC>"
 
     augroup PythonAddImport
-        autocmd InsertLeave <buffer> :call PythonAddImportInsertLeave(0)
+        exec "autocmd InsertLeave <buffer> :call PythonAddImportInsertLeave(" . a:insert_mode . ")"
     augroup end
 
     startinsert!
 endfunction
 
-" nnoremap <C-j> :call PythonAddImport(0)<CR>
-" inoremap <C-j> <ESC>:call PythonAddImport(1)<CR>
+nnoremap <C-j> :call PythonAddImport(0)<CR>
+inoremap <C-j> <ESC>:call PythonAddImport(1)<CR>
 
 
 " black
 let g:black_linelength = 120
 "autocmd BufWritePre *.py execute ':Black'
-
 
 messages clear
