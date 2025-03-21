@@ -37,7 +37,8 @@ function venv3 {
 
     if [[ ! -d "$dest" ]] ; then
         echo "creating virtual environment with python3 at $dest"
-        virtualenv --python $(which python3) "$dest"
+        # virtualenv --python $(which python3) "$dest"
+        python3 -m venv --copies --clear "$dest"
     fi
 
     source "$dest/bin/activate"
