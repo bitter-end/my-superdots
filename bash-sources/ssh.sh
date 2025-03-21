@@ -22,7 +22,8 @@ function init_ssh_agent {
         start_agent;
     fi
 }
-sd::func::jit "ssh scp git" init_ssh_agent
+# sd::func::jit "ssh scp git" init_ssh_agent
+init_ssh_agent
 
 
 # Run a local ssh server in a docker container
