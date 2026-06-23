@@ -1,5 +1,5 @@
 pynvim==0.4.1
-msgpack==1.0.0
+msgpack==1.2.1
 virtualenvwrapper==4.8
 
 
