@@ -2,7 +2,7 @@
 
 
 function json_pp {
-    python3.8 <(cat <<EOF
+    python <(cat <<EOF
 import sys
 import json
 

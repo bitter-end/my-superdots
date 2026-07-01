@@ -11,6 +11,19 @@ function _${1:fn_name}() {
 }
 endsnippet
 
+snippet function-hidden
+function ${1:new_fn} {
+	(
+		unset $1
+
+		# export PATH="..."
+		# . some/init/file.sh
+
+		$1
+	)
+}
+endsnippet
+
 snippet function
 function ${1:new_fn} {
     if [ $# -ne 1 ] ; then
@@ -26,7 +39,7 @@ snippet #!
 
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-THIS_PROG="\$0"
+THIS_PROG="\$BASH_SOURCE"
 
 
 $0
