@@ -10,6 +10,13 @@ function install_batcat {
 sd::lazy_install_hook --interactive batcat install_batcat
 
 function install_fzf {
+    # for rg
+    #  curl -LO https://github.com/BurntSushi/ripgrep/releases/download/15.2.0/ripgrep_15.2.0-1_amd64.deb │ sudo dpkg -i ripgrep_15.2.0-1_amd64.deb
+    # for fzf
+    #  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    # ~/.fzf/install
+    echo "should detemine the latest vesion, curl, and git it ..."
+
     sd::log::command sudo apt install -yq fzf
     echo "reloading fzf settings ..."
     . "$THIS_PROG"
@@ -69,8 +76,7 @@ __fzf_history ()
 fif() {
     if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
     local tmp_opts="${FZF_DEFAULT_OPTS}"
-    # local tmp_opts="${tmp_opts} --preview 'batcat --style=numbers --color=always --line-range $1:-10 --line-range $1:+10 --highlight-line $1 {}'"
-    local tmp_opts="${tmp_opts} --preview 'echo --style=numbers --color=always --line-range $1:-10 --line-range $1:+10 --highlight-line $1 {}'"
+    local tmp_opts="${tmp_opts} --preview 'batcat --style=numbers --color=always --line-range $1:-10 --line-range $1:+10 --highlight-line $1 {}' --bind 'enter:become(code {})' --bind 'ctrl-o:execute(vim {})' --bind 'ctrl-f:preview-page-down,ctrl-b:preview-page-up' "
+
     rg --files-with-matches --no-messages "$1" | FZF_DEFAULT_OPTS=$tmp_opts fzf
-    # rg --files-with-matches --no-messages "$1" | FZF_DEFAULT_COMMAND=$tmp_opts fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
 }
